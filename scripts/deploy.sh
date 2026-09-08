@@ -2,6 +2,8 @@
 # Deploy the curriculum to Cloudflare Pages. Runs the QA harness first; refuses to ship a broken file.
 # usage: bash scripts/deploy.sh [project-name]   (default: system-curriculum)
 set -euo pipefail
+# Always use the browser login (npx wrangler login), never a work API token left in the environment.
+unset CLOUDFLARE_API_TOKEN || true
 cd "$(dirname "$0")/.."
 node qa/qa-harness.js
 rm -rf dist && mkdir dist
