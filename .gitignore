@@ -1,0 +1,14 @@
+# private notes and internal engineering docs (kept off the public repo)
+CLAUDE.md
+.claude/
+docs/
+files/
+files.zip
+00-master-syllabus.md
+certification-roadmap.md
+RAG and Vector database/
+
+# generated
+qa/extracted.js
+dist/
+node_modules/
