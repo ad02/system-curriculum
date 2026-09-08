@@ -6,7 +6,7 @@ It is a single HTML file. No build step, no framework, no server.
 
 ## Use it
 
-- **Online:** open the site address (see the Cloudflare Pages deployment for this repo).
+- **Online:** https://system-curriculum.pages.dev (works on a phone or tablet).
 - **Offline:** download `curriculum.html` and double-click it.
 
 Progress (finished tasks, quiz results, points, streak) is saved in the browser. It is saved per device, so use **Export** and **Import** in the sidebar to carry progress between a PC and a tablet.
