@@ -16897,9 +16897,9 @@ function understandingMeter(c){
 // tells the learner WHEN to do a task, read from its number (e.g. "Lab 2.1" -> after section 2.1)
 function whenLabel(k){
   const m=/(\d+)\.(\d+)/.exec(k||'');
-  if(m) return 'When: right after you read section '+m[1]+'.'+m[2];
-  if(/check/i.test(k||'')) return 'When: during setup, before Level 1';
-  return 'When: after you finish this level';
+  if(m) return 'When: right after you read section '+m[1]+'.'+m[2]+' · Where: on your PC';
+  if(/check/i.test(k||'')) return 'When: during setup, before Level 1 · Where: on your PC';
+  return 'When: after you finish this level · Where: on your PC';
 }
 function taskHTML(t){
   const d = state.done[t.id];
@@ -17728,7 +17728,8 @@ function renderModule(m){
   const mod=CONTENT[m.c];
   let h=`<details class="howto"><summary>How to work this module (read me first)</summary>
     <ol>
-      <li>Read each section in order, top to bottom.</li>
+      <li>Read each section in order, top to bottom. Reading and quizzes work well on a tablet.</li>
+      <li>Do every Lab and Exercise on your PC, where WSL2 and your VMs are. Each task card says so.</li>
       <li>Every Lab and Exercise has a number. That number is <strong>when to do it</strong>: <em>Lab 2.1</em> means do it right after you read section 2.1. Each task card also says its "When".</li>
       <li>Tick a task when you finish it. The Level meter fills up as you go.</li>
       <li>Finish all of a level's tasks before you move to the next level.</li>
