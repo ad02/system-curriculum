@@ -41,8 +41,8 @@ global.document = {
 global.window = { scrollTo(){} };
 global.alert = () => {};
 
-(0, eval)(js + '\n;globalThis.__exp = { md, CONTENT, TRACKS, ALL, allTasks, state, render, DIAGRAMS, CALCS, MATCHES, ORDERS, TERMINALS, hydrateWidgets, GLOSSARY };');
-const { md, CONTENT, TRACKS, ALL, allTasks, state, render, DIAGRAMS, CALCS, MATCHES, ORDERS, TERMINALS, hydrateWidgets, GLOSSARY } = globalThis.__exp;
+(0, eval)(js + '\n;globalThis.__exp = { md, CONTENT, TRACKS, ALL, allTasks, state, render, DIAGRAMS, CALCS, MATCHES, ORDERS, TERMINALS, hydrateWidgets, GLOSSARY, cardsOf, tabsOf, checkpointFor, Lab, MISSIONS, renderApp };');
+const { md, CONTENT, TRACKS, ALL, allTasks, state, render, DIAGRAMS, CALCS, MATCHES, ORDERS, TERMINALS, hydrateWidgets, GLOSSARY, cardsOf, tabsOf, checkpointFor, Lab, MISSIONS, renderApp } = globalThis.__exp;
 
 // ---------- render check ----------
 const main = store['main'], nav = store['nav'];
@@ -161,6 +161,48 @@ console.log('glossary terms in content:', termCount, '| glossary entries:', Obje
 // ---------- interactive: hydrateWidgets must not throw headless ----------
 try { hydrateWidgets(store['main']); hydrateWidgets(undefined); console.log('hydrateWidgets headless-safe: yes'); }
 catch (e) { console.log('FAIL: hydrateWidgets threw headless:', e.message); failures++; }
+
+// ---------- v2: every view renders headless, card split is lossless, checkpoints cover the quiz ----------
+console.log('\n=== V2 CONSOLE CHECKS ===');
+for (const v of ['today', 'map', 'lab', 'review', 'module']) {
+  try { state.view = v; renderApp(); if (main.innerHTML.length < 500) { console.log('FAIL: view too small:', v); failures++; } }
+  catch (e) { console.log('FAIL: view crashed:', v, '->', e.message); failures++; }
+}
+let cardCount = 0, cardProblems = 0;
+for (const [code, mod] of Object.entries(CONTENT)) {
+  for (const tab of tabsOf(mod)) {
+    const cards = cardsOf(tab.body);
+    cardCount += cards.length;
+    if (cards.map(c => c.src).join('\n') !== tab.body) { console.log(`FAIL: ${code}.${tab.key} cards do not rejoin to the source body`); cardProblems++; }
+    if (cards.some(c => !c.title)) { console.log(`FAIL: ${code}.${tab.key} has a card without a heading`); cardProblems++; }
+  }
+  const seen = [];
+  ['level1', 'level2', 'level3', 'level4'].forEach(k => checkpointFor(code, k).forEach(i => seen.push(i)));
+  const n = (mod.quiz || []).length;
+  if (seen.length !== n || seen.some((v, i) => v !== i)) { console.log(`FAIL: ${code} checkpoints do not cover every quiz question exactly once`); cardProblems++; }
+}
+console.log('cards:', cardCount, '| split problems:', cardProblems);
+failures += cardProblems;
+
+// ---------- v2: Linux Lab smoke test (every mission passes from its own hint) ----------
+try {
+  Lab.reset(true); state.game.missionsDone = {}; Lab.mission = 0;
+  ['whoami', 'pwd', 'ls -a', 'cd /var/log', 'tail auth.log', 'cat /var/log/auth.log | grep Failed | wc -l',
+   'grep -r CANARY /srv', 'find /usr/bin -perm -4000',
+   'mkdir -p ~/labs/day1 && touch ~/labs/day1/notes.md && chmod 640 ~/labs/day1/notes.md'].forEach(c => Lab.run(c));
+  const done = Object.keys(state.game.missionsDone).length;
+  if (done !== MISSIONS.length) { console.log('FAIL: lab missions passed', done, 'of', MISSIONS.length); failures++; }
+  else console.log('lab missions pass from their hints:', done + '/' + MISSIONS.length);
+  const expect = (cmd, re, what) => { const o = Lab.run(cmd); if (!re.test(o)) { console.log('FAIL: lab', what, '->', JSON.stringify(o).slice(0, 120)); failures++; } };
+  expect('help', /Commands the lab understands/, 'help');
+  expect('ls -la /home/learner', /\.bashrc/, 'ls -la shows hidden files');
+  expect('echo hello > /tmp/x.txt && cat /tmp/x.txt', /^hello$/, 'redirect then cat');
+  expect('chmod 600 ~/.ssh_key && stat ~/.ssh_key', /600/, 'chmod then stat');
+  expect('grep -c Failed /var/log/auth.log', /^7$/, 'grep -c');
+  expect('nosuchcmd', /command not found/, 'unknown command');
+  expect('cat /etc/shadow', /Permission denied/, 'root-only file stays closed');
+  state.game.missionsDone = {}; Lab.reset(true);
+} catch (e) { console.log('FAIL: lab smoke test threw:', e.message); failures++; }
 
 // ---------- counts per module ----------
 console.log('\n=== COUNTS ===');

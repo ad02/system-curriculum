@@ -19,3 +19,4 @@ node_modules/
 .env.txt
 *.env.txt
 .wrangler/
+Improve app interactivity/
