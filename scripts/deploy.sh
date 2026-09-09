@@ -20,6 +20,7 @@ else
 fi
 
 PROJECT="${1:-system-curriculum}"
+BRANCH="${BRANCH:-main}"   # BRANCH=v2 deploys a preview at https://v2.<project>.pages.dev without touching the live site
 
 node qa/qa-harness.js
 rm -rf dist && mkdir dist
@@ -39,5 +40,5 @@ else
   npx wrangler pages project create "$PROJECT" --production-branch main 2>/dev/null || true
 fi
 
-npx wrangler pages deploy dist --project-name "$PROJECT" --branch main --commit-dirty=true
-echo "Live at: https://$PROJECT.pages.dev"
+npx wrangler pages deploy dist --project-name "$PROJECT" --branch "$BRANCH" --commit-dirty=true
+if [ "$BRANCH" = "main" ]; then echo "Live at: https://$PROJECT.pages.dev"; else echo "Preview at: https://$BRANCH.$PROJECT.pages.dev"; fi
