@@ -22,7 +22,7 @@
   --amber:#FFB259; --amber-soft:#FFC978; --amber-bg:#241D08; --amber-bd:#4A3B10;
   --pink:#FF6B81; --pink-soft:#FF8FA3; --pink-bg:#2A0E16; --pink-bd:#5A2130;
   --blue:#4D8DFF; --blue-soft:#79B7FF; --teal:#0FB5A6;
-  --track:var(--blue);
+  --track:var(--blue); --rule:#2A3560; --red:var(--pink); --paper:var(--bg);
   --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",monospace; --disp:"Space Grotesk",sans-serif;
 }
 [data-track="A"]{--track:var(--blue)} [data-track="B"]{--track:var(--pink)} [data-track="C"]{--track:var(--violet)} [data-track="X"]{--track:var(--teal)}
@@ -84,8 +84,8 @@ button{cursor:pointer}
 .sidebtns button{flex:1;padding:6px 8px;border-radius:8px;border:1px solid var(--line5);background:var(--panel4);color:var(--text2);font-size:11.5px}
 .sidebtns button:hover{border-color:#4B5896}
 .sidebtns button:last-child{flex-basis:100%}
-.saveline{display:flex;align-items:baseline;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--dim);line-height:1.5}
-.saveline button{margin-left:auto;flex:0 0 auto;border:0;background:transparent;padding:0;color:var(--dim);font-family:var(--mono);font-size:9.5px;text-decoration:underline}
+.saveline{display:flex;align-items:baseline;gap:8px;font-family:var(--mono);font-size:10px;color:var(--muted);line-height:1.5}
+.saveline button{margin-left:auto;flex:0 0 auto;border:0;background:transparent;padding:0;color:var(--muted);font-family:var(--mono);font-size:9.5px;text-decoration:underline}
 .saveline button:hover{color:var(--pink-soft)}
 
 /* ---------- screens ---------- */
@@ -141,7 +141,7 @@ button{cursor:pointer}
 .heat span{aspect-ratio:1;border-radius:3px;background:#161E40;border:1px solid #1D264D}
 .heat span.h1{background:#1B3A4A}.heat span.h2{background:#1B5A46}.heat span.h3{background:var(--green)}
 .badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:9px;margin-top:14px}
-.badge{padding:11px 6px;border-radius:12px;text-align:center;background:#0C1226;border:1px solid #1B2444;opacity:.34}
+.badge{padding:11px 6px;border-radius:12px;text-align:center;background:#0C1226;border:1px solid #1B2444;opacity:.5}
 .badge .i{font-family:var(--mono);font-size:17px;color:var(--dim)}
 .badge .n{font-size:9.5px;color:var(--muted2);margin-top:6px;line-height:1.3}
 .badge.got{opacity:1;background:#1A2247;border-color:var(--line6)}
@@ -163,7 +163,7 @@ button{cursor:pointer}
 .modcard:hover{transform:translateY(-2px);border-color:#4B5896}
 .modcard .top{display:flex;justify-content:space-between;align-items:center}
 .modcard .id{font-family:var(--mono);font-size:10.5px;font-weight:600}
-.modcard .st{font-family:var(--mono);font-size:9px;color:var(--dim)}
+.modcard .st{font-family:var(--mono);font-size:9.5px;color:var(--muted)}
 .modcard .ttl{font-size:13px;font-weight:600;line-height:1.35;margin-top:8px;opacity:.62}
 .modcard .bar{height:4px;border-radius:3px;background:#1C2445;margin-top:10px;overflow:hidden}
 .modcard .bar i{display:block;height:100%}
@@ -249,7 +249,8 @@ button{cursor:pointer}
 .body ul,.body ol{margin:14px 0 0;padding-left:22px;max-width:70ch}
 .body li{margin:6px 0}
 .body li::marker{color:var(--violet-dim)}
-.body table{width:100%;border-collapse:collapse;margin:16px 0 0;font-size:13.5px;display:block;overflow-x:auto}
+.body .tblwrap{overflow-x:auto;margin:16px 0 0;border:1px solid var(--line3);border-radius:10px}
+.body table{width:100%;border-collapse:collapse;margin:0;font-size:13.5px}
 .body th,.body td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line3);vertical-align:top;line-height:1.5}
 .body th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--panel3)}
 .body .note{display:flex;flex-direction:column;gap:6px;margin:17px 0 0;padding:14px 16px;border-radius:13px;background:#111C3A;border:1px solid #24406B;border-left:3px solid var(--blue-soft)}
@@ -268,6 +269,9 @@ button{cursor:pointer}
 .stepper{padding:18px;border-radius:16px;background:var(--panel3);border:1px solid var(--line2)}
 .stepper-stage{background:var(--panel4);border:1px solid var(--line4);border-radius:12px;padding:12px;overflow:hidden}
 .stepper-stage svg{display:block;margin:0 auto;max-width:100%}
+.widget svg{--blue-soft:#17305A;--green-soft:#0F3A2C;--amber-soft:#3A2A10;--panel:var(--panel4)}
+.widget svg [fill="#fff"]{fill:var(--panel4)}
+.widget svg [stroke="#fff"]{stroke:var(--panel4)}
 .stepper-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
 .stepper-btn{padding:5px 11px;border-radius:8px;border:1px solid var(--line5);background:var(--panel4);color:var(--text2);font-size:12px}
 .stepper-btn:disabled{opacity:.35}
@@ -359,6 +363,7 @@ button{cursor:pointer}
 .answer.ok .eyebrow{color:var(--green)}.answer:not(.ok) .eyebrow{color:var(--amber)}
 .answer .txt{font-size:14.5px;line-height:1.65;color:#D6DEF6;margin-top:6px;max-width:68ch}
 .cpbtns{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.cp h2 code,.rcard .q code,.choice code,.answer code,.taskdesc code,.rcard .a code{font-family:var(--mono);font-size:.88em;color:var(--green-code);background:var(--deep);padding:1px 5px;border-radius:4px}
 
 /* ---------- review ---------- */
 .rlist{display:flex;flex-direction:column;gap:11px;margin-top:22px}
@@ -664,8 +669,8 @@ const md = s => {
       const cells=r=>r.split('|').slice(1,-1).map(c=>c.trim());
       const head=cells(rows[0]);
       const bodyRows=rows.slice(2).map(cells);
-      out.push('<table><thead><tr>'+head.map(h=>'<th>'+inline(h)+'</th>').join('')+'</tr></thead><tbody>'+
-        bodyRows.map(r=>'<tr>'+r.map(c=>'<td>'+inline(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table>');
+      out.push('<div class="tblwrap"><table><thead><tr>'+head.map(h=>'<th>'+inline(h)+'</th>').join('')+'</tr></thead><tbody>'+
+        bodyRows.map(r=>'<tr>'+r.map(c=>'<td>'+inline(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>');
       continue;
     }
     if(/^[-*] /.test(L)){
@@ -16850,7 +16855,7 @@ function mountMatch(el, data){
         const a=selL,b=selR; selL=null; selR=null;
         if(a.getAttribute('data-i')===b.getAttribute('data-i')){
           a.classList.add('matched'); b.classList.add('matched'); a.classList.remove('sel'); b.classList.remove('sel');
-          if(++done===pairs.length){ el.querySelector('.game-status').textContent='Solved! +15 points'; award(15); }
+          if(++done===pairs.length){ el.querySelector('.game-status').textContent='Solved! +15 xp'; award(15); }
         } else {
           a.classList.add('wrong'); b.classList.add('wrong');
           setTimeout(()=>{ a.classList.remove('wrong','sel'); b.classList.remove('wrong','sel'); },450);
@@ -16873,7 +16878,7 @@ function mountOrder(el, data){
     el.querySelector('.order-check').onclick=()=>{
       const ok=cur.every((it,i)=>it===correct[i]);
       const st=el.querySelector('.game-status');
-      if(ok){ st.textContent='Correct! +15 points'; el.querySelectorAll('.order-item').forEach(x=>x.classList.add('right')); award(15); }
+      if(ok){ st.textContent='Correct! +15 xp'; el.querySelectorAll('.order-item').forEach(x=>x.classList.add('right')); award(15); }
       else st.textContent='Not in order yet. Keep arranging.';
     };
   }
@@ -16901,9 +16906,9 @@ function mountTerminal(el, data){
     if(matches(v)){
       solved=true;
       out.hidden=false; out.textContent=data.output||'(the command ran)';
-      status.textContent='Correct! +10 points'; status.className='term-status ok';
+      status.textContent='Correct! +15 xp'; status.className='term-status ok';
       el.classList.add('solved'); input.disabled=true;
-      award(10);
+      award(15);
     } else {
       tries++;
       status.textContent='Not quite, try again.'; status.className='term-status no';
@@ -17406,10 +17411,10 @@ function qState(c,i){
 }
 
 /* ---------------- persistence ---------------- */
-const GAME_DEFAULTS={points:0,xp:0,streak:0,lastActive:null,badges:[],history:{},quests:{},missionsDone:{},reads:{},checkpoints:{},widgets:{},last:null,cardMode:'stepped',celebrations:true};
+const GAME_DEFAULTS={points:0,xp:0,streak:0,lastActive:null,badges:[],history:{},quests:{},missionsDone:{},reads:{},checkpoints:{},widgets:{},paid:{},last:null,cardMode:'stepped',celebrations:true};
 function normalizeGame(g){
   const out=Object.assign({},GAME_DEFAULTS,g||{});
-  ['history','quests','missionsDone','reads','checkpoints','widgets'].forEach(k=>{ if(!out[k]||typeof out[k]!=='object'||Array.isArray(out[k])) out[k]={}; });
+  ['history','quests','missionsDone','reads','checkpoints','widgets','paid'].forEach(k=>{ if(!out[k]||typeof out[k]!=='object'||Array.isArray(out[k])) out[k]={}; });
   if(!Array.isArray(out.badges)) out.badges=[];
   out.points=+out.points||0;
   out.xp=Math.max(+out.xp||0, out.points);   // old saves: points become xp
@@ -17490,6 +17495,7 @@ function resetAll(){
 }
 
 /* ---------------- xp, streak, quests, history, badges ---------------- */
+function streakNow(){ const t=todayISO(); const la=state.game.lastActive; return (la===t||la===addDaysISO(t,-1)) ? state.game.streak : 0; }
 function levelInfo(){ const xp=state.game.xp, lv=Math.floor(xp/250)+1, into=xp%250; return {lv,into,pct:into/250}; }
 function touchStreak(){
   const t=todayISO();
@@ -17632,12 +17638,13 @@ const qui={};   // transient per-question UI state: pick, revealed, answered
 function qKey(c,i){ return c+':'+i; }
 function answerQuiz(c,i,gotIt){
   const r=qState(c,i);
+  const fresh=(r.right+r.wrong)===0 || daysUntil(r.dueISO)<=0;
   if(gotIt){ r.right++; r.box=Math.min(r.box+1,5); r.known=true; }
   else { r.wrong++; r.box=1; }
   r.dueISO=addDaysISO(todayISO(),LEITNER[r.box-1]);
   const q=CONTENT[c].quiz[i];
   const auto=Array.isArray(q.choices);
-  award(gotIt?(auto?20:15):2);
+  award(gotIt&&fresh?(auto?20:15):2);
   bump('quiz');
 }
 function dueText(iso){
@@ -17668,7 +17675,7 @@ function questionHTML(c,i,ctx){
 }
 function afterAnswer(c,i,ctx,gotIt){
   answerQuiz(c,i,gotIt);
-  if(ctx==='cp'){ if(gotIt) state.cpRight++; renderCheckpoint(); if(gotIt) say('+20 xp · correct'); else say('Not quite. Read the why below.'); }
+  if(ctx==='cp'){ if(gotIt) state.cpRight++; renderCheckpoint(); if(gotIt) say('+20 xp · correct'); else say('Not quite. Read the explanation below.'); }
   else if(ctx==='rv'){ renderReview(); if(gotIt) say('Card retired for now. It comes back later.'); else say('Back tomorrow. That is the point.'); }
 }
 function pickChoice(c,i,ci,ctx){
@@ -17706,8 +17713,9 @@ const TRACK_META={
   X:{color:'#0FB5A6',certs:'where the three tracks meet'}
 };
 function modOf(c){ return ALL.find(x=>x.c===c)||ALL[0]; }
+function clearStaleQui(){ for(const k of Object.keys(qui)){ if(!qui[k].answered) delete qui[k]; } }
 function setView(v){
-  state.view=v;
+  state.view=v; clearStaleQui();
   const side=document.getElementById('side'); if(side&&side.classList) side.classList.remove('open');
   renderApp();
   window.scrollTo(0,0);
@@ -17728,7 +17736,7 @@ function renderSide(){
       <div style="flex:1;min-width:0">
         <div class="xpline">${g.xp} xp · ${250-L.into} to next</div>
         <div class="xpbar"><i style="width:${Math.round(L.pct*100)}%"></i></div>
-        <div class="streak"><span class="flame">▲</span> ${g.streak}-day streak</div>
+        <div class="streak"><span class="flame">▲</span> ${streakNow()}-day streak</div>
       </div>
     </div>
     <div class="nav">${nav.map(([v,ico,lab,meta])=>`<button type="button" class="navbtn${state.view===v?' on':''}" onclick="setView('${v}')"><span class="ico">${ico}</span><span class="lab">${lab}</span><span class="meta">${meta}</span></button>`).join('')}</div>
@@ -17777,7 +17785,7 @@ function renderToday(){
   for(let i=83;i>=0;i--){ const d=addDaysISO(today,-i); const v=g.history[d]||0; const cls=v>=6?' h3':v>=3?' h2':v>=1?' h1':''; cells.push(`<span class="${cls.trim()}" title="${d}: ${v?v+' actions':'no work'}"></span>`); }
   document.getElementById('main').innerHTML=`<div class="screen">
     <div class="head"><div><div class="eyebrow">${dateLine}</div><h1 class="title">Today's mission</h1><p class="lede">One card, one lab mission, two questions. Small, every day, beats big once a month.</p></div>
-      <div class="stats"><div class="stat"><div class="v" style="color:var(--violet-soft)">${g.xp}</div><div class="l">total xp</div></div><div class="stat"><div class="v" style="color:var(--amber)">${g.streak}</div><div class="l">day streak</div></div><div class="stat"><div class="v" style="color:var(--green-soft)">${doneN}/${tasks.length}</div><div class="l">${m.c} tasks</div></div></div></div>
+      <div class="stats"><div class="stat"><div class="v" style="color:var(--violet-soft)">${g.xp}</div><div class="l">total xp</div></div><div class="stat"><div class="v" style="color:var(--amber)">${streakNow()}</div><div class="l">day streak</div></div><div class="stat"><div class="v" style="color:var(--green-soft)">${doneN}/${tasks.length}</div><div class="l">${m.c} tasks</div></div></div></div>
     <div class="grid">
       <div class="w6"><div class="hero"><div class="eyebrow"><span class="dot"></span>Pick up where you left off</div>
         <h2>${m.c} · ${n.tab.name}${n.card.title?' · '+n.card.title:''}</h2>
@@ -17787,7 +17795,7 @@ function renderToday(){
       <div class="w1"><div class="panel"><div class="eyebrow">Daily quests</div>
         <div class="quests">${QUESTS.map(x=>`<div class="quest${q[x.k]?' on':''}"><span class="box">${q[x.k]?'✓':''}</span><span><span class="t">${x.label}</span><span class="r">${x.reward}</span></span></div>`).join('')}</div>
         <div class="qbar"><i style="width:${Math.round(cleared/3*100)}%"></i></div><div class="qline">${cleared} of 3 cleared today · quests clear themselves as you work</div></div></div>
-      <div class="w1s"><div class="panel"><div class="eyebrow">Last 12 weeks</div><div class="heat">${cells.join('')}</div><div class="qline">${g.streak?'streak alive · '+g.streak+' day'+(g.streak===1?'':'s'):'no streak yet · do one thing today'}</div></div></div>
+      <div class="w1s"><div class="panel"><div class="eyebrow">Last 12 weeks</div><div class="heat">${cells.join('')}</div><div class="qline">${streakNow()?'streak alive · '+streakNow()+' day'+(streakNow()===1?'':'s'):'no streak yet · do one thing today'}</div></div></div>
       <div class="w1s"><div class="panel"><div class="eyebrow">Badges · ${badgesEarned().length}/${BADGES.length}</div>
         <div class="badges">${BADGES.map(b=>`<div class="badge${state.game.badges.includes(b.id)?' got':''}" title="${b.hint}"><div class="i">${b.icon}</div><div class="n">${b.name}</div></div>`).join('')}</div></div></div>
     </div>
@@ -17824,7 +17832,7 @@ function clampModuleState(){
   const cards=cardsOf(tabs[state.tab].body);
   state.step=Math.max(0,Math.min(state.step,cards.length-1));
 }
-function rememberSpot(){ state.game.last={c:state.cur,tab:state.tab,step:state.step}; }
+function rememberSpot(){ state.game.last={c:state.cur,tab:state.tab,step:state.step}; persist(); }
 function readKey(){ return state.cur+':'+curTabs()[state.tab].key+':'+state.step; }
 function hasCheckpoint(){ return checkpointFor(state.cur,curTabs()[state.tab].key).length>0; }
 function tabDone(c,tab){
@@ -17875,7 +17883,7 @@ function renderModule(){
       ${stepped?`<div class="steps">${dots}<span class="stepline">${state.quizOn?'checkpoint':'card '+(state.step+1)+' of '+cards.length}</span></div>`:''}
       <div id="cardhost">${state.quizOn?'':shown.map(cardHTML).join('')}</div>
       <div id="cphost"></div>
-      ${!state.quizOn&&labMods.includes(m.c)&&(last||!stepped)?`<button type="button" class="labcta" onclick="setView('lab')"><span class="g">▚</span><span><span class="t">Practise this in the Linux Lab</span><span class="s">A real shell in your browser, six missions, no VM needed. Then repeat it for real in WSL2.</span></span></button>`:''}
+      ${!state.quizOn&&labMods.includes(m.c)&&tab.key.startsWith('level')&&(last||!stepped)?`<button type="button" class="labcta" onclick="setView('lab')"><span class="g">▚</span><span><span class="t">Practise this in the Linux Lab</span><span class="s">A real shell in your browser, six missions, no VM needed. Then repeat it for real in WSL2.</span></span></button>`:''}
       ${state.quizOn?'':`<div class="cardnav"><button type="button" class="btn ghost" ${stepped&&state.step>0?'':'style="visibility:hidden"'} onclick="prevCard()">← Back</button><button type="button" class="btn primary" onclick="${nextAct}()">${nextLabel}</button></div>`}
     </div>
     <aside class="modaside">
@@ -17908,8 +17916,10 @@ function toggle(id){
   if(state.done[id]){
     const t=allTasks(state.cur).find(x=>x.id===id)||{t:'Task'};
     bump('task');
-    if(!wasDone && moduleDone(state.cur)) celebrate('★','Module complete',modOf(state.cur).t+'. Every task ticked. That repository is portfolio-ready.',200);
-    else celebrate('▲','Task done',t.t,25);
+    const modKey='module:'+state.cur;
+    if(!wasDone && moduleDone(state.cur) && !state.game.paid[modKey]){ state.game.paid[modKey]=true; celebrate('★','Module complete',modOf(state.cur).t+'. Every task ticked. That repository is portfolio-ready.',200); }
+    else if(!state.game.paid[id]){ state.game.paid[id]=true; celebrate('▲','Task done',t.t,25); }
+    else { persist(); say('Task ticked again. The xp was paid the first time.'); }
   } else persist();
   if(state.view==='module') refreshModuleBits(); else renderSide();
 }
@@ -17957,7 +17967,7 @@ function nextCheckpoint(){
   if(first) celebrate('◆','Checkpoint cleared',state.cpRight+' of '+list.length+' right. Missed ones go into spaced review.',60);
   else { persist(); say(state.cpRight+' of '+list.length+' right. Missed ones go into spaced review.'); }
 }
-function leaveCheckpoint(){ state.quizOn=false; renderModule(); }
+function leaveCheckpoint(){ state.quizOn=false; clearStaleQui(); renderModule(); }
 
 /* ---------------- Spaced review ---------------- */
 function renderReview(){
@@ -17975,16 +17985,16 @@ function renderReview(){
 /* ---------------- Linux Lab: a real shell over an in-memory filesystem ---------------- */
 const MISSIONS=[
   {t:'Get your bearings',xp:20,body:'Find out who you are and where you are, then list everything in your home directory, including the hidden files.',hint:'whoami  then  pwd  then  ls -a',
-   test:(c)=>c.cmd.trim().startsWith('ls')&&/-\w*a/.test(c.cmd)&&c.cwd==='/home/learner'},
+   test:(c)=>{ const seg=c.last; if(!/^ls\b/.test(seg)||!/(^|\s)-\w*a/.test(seg)) return false; const target=seg.split(/\s+/).slice(1).find(x=>!x.startsWith('-'))||'.'; return c.resolve(target)==='/home/learner'; }},
   {t:'Read the auth log',xp:25,body:'Someone has been failing to log in. The evidence is in the system log directory. Read the last lines of auth.log.',hint:'cd /var/log  then  tail auth.log',
-   test:(c)=>/auth\.log/.test(c.cmd)&&/^(cat|tail|head|less|grep)/.test(c.cmd.trim())},
+   test:(c)=>/auth\.log/.test(c.last)&&/^(cat|tail|head|grep)\b/.test(c.last)&&!c.err},
   {t:'Count the failures',xp:35,body:'Now count exactly how many failed password attempts that log holds. One command, using a pipe.',hint:'cat /var/log/auth.log | grep Failed | wc -l',
-   test:(c)=>c.cmd.includes('|')&&/wc/.test(c.cmd)&&c.out.trim()==='7'},
+   test:(c)=>c.last.includes('|')&&c.out.trim()==='7'},
   {t:'Hunt the canary',xp:40,body:'A secret string starting with CANARY- is hidden in a file somewhere under /srv. Find it by searching file contents recursively.',hint:'grep -r CANARY /srv',
    test:(c)=>/CANARY-7F3A-LEAKED/.test(c.out)},
-  {t:'Find what runs as root',xp:45,body:'SUID binaries run with their owner\'s power, not yours. That is how privilege escalation starts. List every SUID file under /usr/bin.',hint:'find /usr/bin -perm -4000',
-   test:(c)=>/find/.test(c.cmd)&&/4000/.test(c.cmd)&&/passwd/.test(c.out)},
-  {t:'Build and lock down',xp:50,body:'Make the directory ~/labs/day1, create notes.md inside it, and set its permissions so only you can read and write it (640).',hint:'mkdir -p ~/labs/day1 && touch ~/labs/day1/notes.md && chmod 640 ~/labs/day1/notes.md',
+  {t:'Find what runs as root',xp:45,body:'SUID binaries run with their owner\'s power, not yours. That is how an attacker turns a normal user into root (privilege escalation). List every SUID file under /usr/bin.',hint:'find /usr/bin -perm -4000',
+   test:(c)=>/^find\b/.test(c.last)&&/4000/.test(c.last)&&/passwd/.test(c.out)},
+  {t:'Build and lock down',xp:50,body:'Make the directory ~/labs/day1, create notes.md inside it, and set its permissions to 640: you can read and write it, your group can only read it, and nobody else can open it.',hint:'mkdir -p ~/labs/day1 && touch ~/labs/day1/notes.md && chmod 640 ~/labs/day1/notes.md',
    test:(c)=>{const n=c.find('/home/learner/labs/day1/notes.md');return !!n&&n.t==='f'&&n.m==='640';}}
 ];
 const CHEATS=['ls -l','cd /etc','cat /etc/os-release','tree /srv','grep -rn CANARY /srv','find / -name "*.jsonl"','ps','free -h','df -h','history','man grep','chmod 600 ~/.ssh_key'];
@@ -18062,6 +18072,16 @@ const Lab={
     if(cur) out.push(cur); return out;
   },
   promptStr(){ const c=this.cwd==='/home/learner'?'~':this.cwd.replace('/home/learner','~'); return 'learner@lab:'+c+'$'; },
+  // split on a separator that sits outside quotes ('a|b' inside "..." stays whole)
+  splitTop(s,sep){
+    const out=[]; let cur='', q=null;
+    for(let i=0;i<s.length;i++){ const c=s[i];
+      if(q){ cur+=c; if(c===q) q=null; continue; }
+      if(c==='"'||c==="'"){ q=c; cur+=c; continue; }
+      if(s.startsWith(sep,i)){ out.push(cur); cur=''; i+=sep.length-1; continue; }
+      cur+=c; }
+    out.push(cur); return out;
+  },
   // runs one typed line; returns the combined output so the harness can test missions headlessly
   run(raw){
     const line=raw.trim();
@@ -18069,7 +18089,7 @@ const Lab={
     if(!line) return '';
     if(line==='clear'){ this.lines=[]; this.hist.push(line); this.histI=-1; return ''; }
     let out='', err='';
-    for(const chain of line.split('&&')){
+    for(const chain of this.splitTop(line,'&&')){
       const r=this.pipeline(chain.trim());
       out=r.out; err=r.err;
       if(err) break;
@@ -18079,7 +18099,7 @@ const Lab={
     this.hist.push(line); this.histI=-1;
     if(this.lines.length>400) this.lines.splice(0,this.lines.length-400);
     const combined=(out||'')+(err?'\n'+err:'');
-    this.checkMission(line,combined);
+    this.checkMission(line,out,err);
     return combined;
   },
   pipeline(chain){
@@ -18087,7 +18107,7 @@ const Lab={
     const m=body.match(/(>>|>)\s*([^\s>]+)\s*$/);
     if(m){ append=m[1]==='>>'; redirect=m[2]; body=body.slice(0,m.index); }
     let stdin=null, out='', err='';
-    for(const part of body.split('|')){
+    for(const part of this.splitTop(body,'|')){
       const tk=this.tok(part.trim());
       if(!tk.length) continue;
       const r=this.exec(tk[0],tk.slice(1),stdin);
@@ -18098,7 +18118,8 @@ const Lab={
       const segs=this.segs(redirect), par=this.parentOf(segs), nm=segs[segs.length-1];
       if(!par||par.t!=='d') return {out:'',err:'bash: '+redirect+': No such file or directory'};
       const ex=par.ch[nm];
-      if(ex&&ex.t==='f') ex.c=append?(ex.c+out+'\n'):(out+'\n');
+      if(ex&&ex.t==='d') return {out:'',err:'bash: '+redirect+': Is a directory'};
+      if(ex) ex.c=append?(ex.c+out+'\n'):(out+'\n');
       else par.ch[nm]=fsFile(out+'\n','644','learner');
       return {out:'',err:''};
     }
@@ -18162,8 +18183,10 @@ const Lab={
       }
       case 'cat':{ const r=readTarget(); return r.e?no(r.e):ok(r.v.replace(/\n$/,'')); }
       case 'head': case 'tail':{
+        const ni=a.indexOf('-n'); let n=10;
+        if(ni>-1&&/^\d+$/.test(a[ni+1]||'')){ n=parseInt(a[ni+1],10); const at=args.indexOf(a[ni+1]); if(at>-1) args.splice(at,1); }
+        else n=parseInt((a.find(x=>/^-\d+$/.test(x))||'-10').slice(1),10);
         const r=readTarget(); if(r.e) return no(r.e);
-        const n=parseInt((a.find(x=>/^-\d+$/.test(x))||'-10').slice(1),10);
         const L=r.v.replace(/\n$/,'').split('\n');
         return ok((cmd==='head'?L.slice(0,n):L.slice(-n)).join('\n'));
       }
@@ -18290,18 +18313,19 @@ const Lab={
       default: return no(cmd+': command not found');
     }
   },
-  checkMission(cmd,out){
+  checkMission(cmd,out,err){
     const i=this.mission, m=MISSIONS[i];
     if(!m||state.game.missionsDone[i]) return;
     let pass=false;
-    try{ pass=m.test({cmd,out:out||'',cwd:this.cwd,find:p=>this.find(p)}); }catch(e){ pass=false; }
+    const last=this.splitTop(cmd,'&&').pop().trim();
+    try{ pass=m.test({cmd,last,out:out||'',err:!!err,cwd:this.cwd,find:p=>this.find(p),resolve:p=>'/'+this.segs(p).join('/')}); }catch(e){ pass=false; }
     if(pass){
       state.game.missionsDone[i]=true; this.hintOn=false;
       const next=MISSIONS.findIndex((x,j)=>!state.game.missionsDone[j]);
       this.mission=next<0?i:next;
       this.lines.push({k:'win',t:'✓ Mission complete: '+m.t+'  (+'+m.xp+' xp)'},{k:'sys',t:''});
       bump('lab');
-      celebrate('▲','Mission complete',m.t+'. That is a real command you will type again on a real box.',m.xp);
+      celebrate('▲','Mission complete',m.t+'. That is a real command you will type again on a real server.',m.xp);
     }
   }
 };

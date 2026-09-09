@@ -201,6 +201,16 @@ try {
   expect('grep -c Failed /var/log/auth.log', /^7$/, 'grep -c');
   expect('nosuchcmd', /command not found/, 'unknown command');
   expect('cat /etc/shadow', /Permission denied/, 'root-only file stays closed');
+  expect('echo x > /var/log', /Is a directory/, 'redirect cannot replace a directory');
+  expect('grep "root|admin" /var/log/auth.log | wc -l', /^\s*0\s*$/, 'a pipe inside quotes is not a pipe');
+  expect('head -n 2 /var/log/auth.log | wc -l', /^2$/, 'head -n N');
+  expect('cd /tmp && echo "a|b" > t.txt && cat t.txt', /^a\|b$/, 'quoted pipe survives a chain');
+  // missions must also pass when chained with &&, the style mission 6 teaches
+  state.game.missionsDone = {}; Lab.reset(true);
+  Lab.run('whoami && pwd && ls -a'); Lab.run('cd /var/log && tail auth.log');
+  if (Object.keys(state.game.missionsDone).length !== 2) { console.log('FAIL: chained && commands do not clear missions 1 and 2'); failures++; }
+  Lab.reset(true); state.game.missionsDone = {}; Lab.run('ls -la /etc');
+  if (state.game.missionsDone[0]) { console.log('FAIL: mission 1 passed without listing the home directory'); failures++; }
   state.game.missionsDone = {}; Lab.reset(true);
 } catch (e) { console.log('FAIL: lab smoke test threw:', e.message); failures++; }
 
